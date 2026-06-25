@@ -16,9 +16,11 @@ class Solution:
         running_mean = np.array(running_mean)
         running_var = np.array(running_var)
         if training:
-            running_mean = (1-momentum)*running_mean + momentum*np.mean(x,axis=0)
-            running_var = (1-momentum)*running_var+momentum*np.var(x,axis=0)
-            y = gamma*((x-np.mean(x,axis=0))/np.power(np.var(x,axis=0)+eps,0.5))+beta
+            b_m = np.mean(x,axis=0)
+            b_v = np.var(x,axis=0)
+            running_mean = (1-momentum)*running_mean + momentum*b_m
+            running_var = (1-momentum)*running_var+momentum*b_v
+            y = gamma*((x-b_m)/np.power(b_v+eps,0.5))+beta
         else:
             y = gamma*((x-running_mean)/np.power(running_var+eps,0.5))+beta
         return (
