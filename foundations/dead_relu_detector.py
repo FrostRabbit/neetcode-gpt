@@ -28,7 +28,8 @@ class Solution:
         #    with depth AND the last layer's fraction > 0.1
         # 4. 'healthy' if max dead fraction < 0.1
         # 5. 'healthy' otherwise
-        if any(x > 0.5 for x in dead_fractions): return 'use_leaky_relu'
+        m = max(dead_fractions)
+        if m > 0.5: return 'use_leaky_relu'
         if dead_fractions[0] > 0.3: return 'reinitialize'
         if dead_fractions[-1] > 0.1:
             flag = True
@@ -37,5 +38,5 @@ class Solution:
                     flag = False
                     break
             if flag: return 'reduce_learning_rate'
-        if max(dead_fractions) < 0.1: return 'healthy'
+        if m < 0.1: return 'healthy'
         return 'healthy'
