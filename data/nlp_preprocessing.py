@@ -21,9 +21,9 @@ class Solution:
             T = max(T, len(p), len(n))
             pos.append(p)
             neg.append(n)
-            vocab = vocab.union(p, n)
+            vocab.update(p, n)
         vocab = sorted(vocab)
-        vocab = dict(zip(vocab, [x+1 for x in range(len(vocab))]))
+        vocab = dict(zip(vocab, [float(x+1) for x in range(len(vocab))]))
         temp = []
         print(vocab)
         for p in pos:
