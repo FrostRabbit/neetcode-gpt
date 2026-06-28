@@ -17,7 +17,9 @@ class Solution:
                 break
             words = chars.split()
             count = Counter([(words[i], words[i+1]) for i in range(len(words)-1)])
-            pair = sorted(count.items(), key=lambda item: (-item[1], item[0]))[0][0]
+            max_v = max(count.values())
+            flat_pairs = [item for item in count.items() if item[1] == max_v]
+            pair = sorted(flat_pairs, key=lambda item: item[0])[0][0]
             print(pair)
             results.append(list(pair))
             chars = chars.replace(' '.join(pair), ''.join(pair))
