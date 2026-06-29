@@ -19,6 +19,8 @@ class Solution:
         X = torch.zeros((batch_size, context_length), dtype=torch.long)
         Y = torch.zeros((batch_size, context_length), dtype=torch.long)
         start = torch.randint(0, data.shape[0] - context_length, (batch_size,))
-        idx = start.unsqueeze(1) + torch.arange(context_length)
+        
+        # (batch_size,) -> (batch_size, 1) + (1,context_length) -> (batch_size, context_length)
+        idx = start.unsqueeze(1) + torch.arange(context_length) 
         
         return (data[idx], data[idx+1])
