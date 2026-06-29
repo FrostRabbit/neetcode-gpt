@@ -12,7 +12,7 @@ class Solution:
         start = torch.randint(0, len(words) - context_length, (batch_size,)).tolist()
         X = []
         Y = []
-        for idx, s in enumerate(start):
+        for s in start:
             X.append(words[s:s+context_length])
             Y.append( words[s+1:s+context_length+1])
         return (X, Y)
